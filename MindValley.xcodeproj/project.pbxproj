@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A6621E10243F02F900BF393B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E0F243F02F900BF393B /* AppDelegate.swift */; };
-		A6621E14243F02F900BF393B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E13243F02F900BF393B /* ViewController.swift */; };
-		A6621E17243F02F900BF393B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6621E15243F02F900BF393B /* Main.storyboard */; };
 		A6621E1C243F02FD00BF393B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6621E1A243F02FD00BF393B /* LaunchScreen.storyboard */; };
 		A6621E27243F02FD00BF393B /* MindValleyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E26243F02FD00BF393B /* MindValleyTests.swift */; };
 		A6621E60243F079F00BF393B /* ListUsersInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E33243F079F00BF393B /* ListUsersInteractor.swift */; };
@@ -35,7 +33,6 @@
 		A6621E78243F079F00BF393B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E57243F079F00BF393B /* Logger.swift */; };
 		A6621E79243F079F00BF393B /* NameDescribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E58243F079F00BF393B /* NameDescribable.swift */; };
 		A6621E7A243F079F00BF393B /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E59243F079F00BF393B /* KeyboardHelper.swift */; };
-		A6621E7E243F079F00BF393B /* ListUsersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E5F243F079F00BF393B /* ListUsersAPI.swift */; };
 		A6621E81243F08AB00BF393B /* Reachablility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E80243F08AB00BF393B /* Reachablility.swift */; };
 		A6621E83243F094400BF393B /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E82243F094400BF393B /* ImageCache.swift */; };
 		A6621E85243F094C00BF393B /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E84243F094C00BF393B /* ImageView.swift */; };
@@ -44,6 +41,12 @@
 		A6621E8B243F275000BF393B /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E8A243F275000BF393B /* Media.swift */; };
 		A6621E8D243F2C0B00BF393B /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E8C243F2C0B00BF393B /* Asset.swift */; };
 		A6621E8F243F2C7D00BF393B /* Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E8E243F2C7D00BF393B /* Series.swift */; };
+		A6621E93243F2F6500BF393B /* ChannelsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E92243F2F6500BF393B /* ChannelsAPI.swift */; };
+		A6621E9A243F318900BF393B /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6621E95243F318900BF393B /* Roboto-Light.ttf */; };
+		A6621E9B243F318900BF393B /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6621E96243F318900BF393B /* Roboto-Black.ttf */; };
+		A6621E9C243F318900BF393B /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6621E97243F318900BF393B /* Roboto-Medium.ttf */; };
+		A6621E9D243F318900BF393B /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6621E98243F318900BF393B /* Roboto-Regular.ttf */; };
+		A6621E9E243F318900BF393B /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6621E99243F318900BF393B /* Roboto-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,8 +62,6 @@
 /* Begin PBXFileReference section */
 		A6621E0C243F02F900BF393B /* MindValley.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindValley.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6621E0F243F02F900BF393B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A6621E13243F02F900BF393B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A6621E16243F02F900BF393B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A6621E1B243F02FD00BF393B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A6621E1D243F02FD00BF393B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6621E22243F02FD00BF393B /* MindValleyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MindValleyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,7 +90,6 @@
 		A6621E57243F079F00BF393B /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A6621E58243F079F00BF393B /* NameDescribable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameDescribable.swift; sourceTree = "<group>"; };
 		A6621E59243F079F00BF393B /* KeyboardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
-		A6621E5F243F079F00BF393B /* ListUsersAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUsersAPI.swift; sourceTree = "<group>"; };
 		A6621E80243F08AB00BF393B /* Reachablility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachablility.swift; sourceTree = "<group>"; };
 		A6621E82243F094400BF393B /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		A6621E84243F094C00BF393B /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
@@ -98,6 +98,12 @@
 		A6621E8A243F275000BF393B /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		A6621E8C243F2C0B00BF393B /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		A6621E8E243F2C7D00BF393B /* Series.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Series.swift; sourceTree = "<group>"; };
+		A6621E92243F2F6500BF393B /* ChannelsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsAPI.swift; sourceTree = "<group>"; };
+		A6621E95243F318900BF393B /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		A6621E96243F318900BF393B /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		A6621E97243F318900BF393B /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		A6621E98243F318900BF393B /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		A6621E99243F318900BF393B /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +151,6 @@
 				A6621E31243F079F00BF393B /* Modules */,
 				A6621E39243F079F00BF393B /* Resources */,
 				A6621E0F243F02F900BF393B /* AppDelegate.swift */,
-				A6621E13243F02F900BF393B /* ViewController.swift */,
-				A6621E15243F02F900BF393B /* Main.storyboard */,
 				A6621E1A243F02FD00BF393B /* LaunchScreen.storyboard */,
 				A6621E1D243F02FD00BF393B /* Info.plist */,
 			);
@@ -186,6 +190,7 @@
 		A6621E39243F079F00BF393B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A6621E94243F318000BF393B /* Fonts */,
 				A6621E3A243F079F00BF393B /* Assets.xcassets */,
 				A6621E3B243F079F00BF393B /* APIConfiguration.plist */,
 			);
@@ -295,7 +300,7 @@
 		A6621E5E243F079F00BF393B /* APIs */ = {
 			isa = PBXGroup;
 			children = (
-				A6621E5F243F079F00BF393B /* ListUsersAPI.swift */,
+				A6621E92243F2F6500BF393B /* ChannelsAPI.swift */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -307,6 +312,18 @@
 				A6621E84243F094C00BF393B /* ImageView.swift */,
 			);
 			path = Image;
+			sourceTree = "<group>";
+		};
+		A6621E94243F318000BF393B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A6621E96243F318900BF393B /* Roboto-Black.ttf */,
+				A6621E99243F318900BF393B /* Roboto-Bold.ttf */,
+				A6621E95243F318900BF393B /* Roboto-Light.ttf */,
+				A6621E97243F318900BF393B /* Roboto-Medium.ttf */,
+				A6621E98243F318900BF393B /* Roboto-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -391,9 +408,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6621E1C243F02FD00BF393B /* LaunchScreen.storyboard in Resources */,
+				A6621E9D243F318900BF393B /* Roboto-Regular.ttf in Resources */,
 				A6621E67243F079F00BF393B /* APIConfiguration.plist in Resources */,
+				A6621E9C243F318900BF393B /* Roboto-Medium.ttf in Resources */,
+				A6621E9B243F318900BF393B /* Roboto-Black.ttf in Resources */,
+				A6621E9A243F318900BF393B /* Roboto-Light.ttf in Resources */,
+				A6621E9E243F318900BF393B /* Roboto-Bold.ttf in Resources */,
 				A6621E66243F079F00BF393B /* Assets.xcassets in Resources */,
-				A6621E17243F02F900BF393B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,7 +434,6 @@
 			files = (
 				A6621E6C243F079F00BF393B /* NetworkConfiguration.swift in Sources */,
 				A6621E83243F094400BF393B /* ImageCache.swift in Sources */,
-				A6621E14243F02F900BF393B /* ViewController.swift in Sources */,
 				A6621E6D243F079F00BF393B /* UIViewController+Ext.swift in Sources */,
 				A6621E72243F079F00BF393B /* BaseViewController.swift in Sources */,
 				A6621E65243F079F00BF393B /* ListUsersDependency.swift in Sources */,
@@ -428,6 +448,7 @@
 				A6621E62243F079F00BF393B /* ListUsersViewController.swift in Sources */,
 				A6621E8B243F275000BF393B /* Media.swift in Sources */,
 				A6621E79243F079F00BF393B /* NameDescribable.swift in Sources */,
+				A6621E93243F2F6500BF393B /* ChannelsAPI.swift in Sources */,
 				A6621E68243F079F00BF393B /* NetworkClient.swift in Sources */,
 				A6621E77243F079F00BF393B /* ViewRouter.swift in Sources */,
 				A6621E64243F079F00BF393B /* ListUsersInterfaces.swift in Sources */,
@@ -440,7 +461,6 @@
 				A6621E74243F079F00BF393B /* NavigationController.swift in Sources */,
 				A6621E76243F079F00BF393B /* RouterInterfaces.swift in Sources */,
 				A6621E69243F079F00BF393B /* APIEndpoint.swift in Sources */,
-				A6621E7E243F079F00BF393B /* ListUsersAPI.swift in Sources */,
 				A6621E8F243F2C7D00BF393B /* Series.swift in Sources */,
 				A6621E81243F08AB00BF393B /* Reachablility.swift in Sources */,
 			);
@@ -465,14 +485,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A6621E15243F02F900BF393B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A6621E16243F02F900BF393B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A6621E1A243F02FD00BF393B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

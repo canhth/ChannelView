@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum ChannelType {
+    case series
+    case course
+}
+
 struct Channel: Decodable {
     let id: String
     var series = [Series]()
@@ -23,5 +28,9 @@ struct Channel: Decodable {
     
     var coverURL: String? {
         return coverAsset?.url
+    }
+    
+    var type: ChannelType {
+        return series.count > 0 ? .series : .course
     }
 }
