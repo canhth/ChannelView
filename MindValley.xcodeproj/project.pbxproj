@@ -10,12 +10,6 @@
 		A6621E10243F02F900BF393B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E0F243F02F900BF393B /* AppDelegate.swift */; };
 		A6621E1C243F02FD00BF393B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6621E1A243F02FD00BF393B /* LaunchScreen.storyboard */; };
 		A6621E27243F02FD00BF393B /* MindValleyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E26243F02FD00BF393B /* MindValleyTests.swift */; };
-		A6621E60243F079F00BF393B /* ListUsersInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E33243F079F00BF393B /* ListUsersInteractor.swift */; };
-		A6621E61243F079F00BF393B /* ListUsersRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E34243F079F00BF393B /* ListUsersRouter.swift */; };
-		A6621E62243F079F00BF393B /* ListUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E35243F079F00BF393B /* ListUsersViewController.swift */; };
-		A6621E63243F079F00BF393B /* ListUsersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E36243F079F00BF393B /* ListUsersPresenter.swift */; };
-		A6621E64243F079F00BF393B /* ListUsersInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E37243F079F00BF393B /* ListUsersInterfaces.swift */; };
-		A6621E65243F079F00BF393B /* ListUsersDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E38243F079F00BF393B /* ListUsersDependency.swift */; };
 		A6621E66243F079F00BF393B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6621E3A243F079F00BF393B /* Assets.xcassets */; };
 		A6621E67243F079F00BF393B /* APIConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6621E3B243F079F00BF393B /* APIConfiguration.plist */; };
 		A6621E68243F079F00BF393B /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621E3F243F079F00BF393B /* NetworkClient.swift */; };
@@ -47,6 +41,18 @@
 		A6621E9C243F318900BF393B /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6621E97243F318900BF393B /* Roboto-Medium.ttf */; };
 		A6621E9D243F318900BF393B /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6621E98243F318900BF393B /* Roboto-Regular.ttf */; };
 		A6621E9E243F318900BF393B /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6621E99243F318900BF393B /* Roboto-Bold.ttf */; };
+		A6621EA6243F324800BF393B /* ChannelsInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EA0243F324800BF393B /* ChannelsInterfaces.swift */; };
+		A6621EA7243F324800BF393B /* ChannelsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EA1243F324800BF393B /* ChannelsPresenter.swift */; };
+		A6621EA8243F324800BF393B /* ChannelsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EA2243F324800BF393B /* ChannelsRouter.swift */; };
+		A6621EA9243F324800BF393B /* ChannelsDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EA3243F324800BF393B /* ChannelsDependency.swift */; };
+		A6621EAA243F324800BF393B /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EA4243F324800BF393B /* ChannelsViewController.swift */; };
+		A6621EAB243F324800BF393B /* ChannelsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EA5243F324800BF393B /* ChannelsInteractor.swift */; };
+		A6621EB0243F730A00BF393B /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EAC243F730A00BF393B /* String+Ext.swift */; };
+		A6621EB1243F730A00BF393B /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EAD243F730A00BF393B /* UIView+Ext.swift */; };
+		A6621EB3243F730A00BF393B /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EAF243F730A00BF393B /* UITableView+Ext.swift */; };
+		A6621EB5243F737400BF393B /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EB4243F737400BF393B /* UIFont+Ext.swift */; };
+		A6621EB7243F738000BF393B /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EB6243F738000BF393B /* UIColor+Ext.swift */; };
+		A6621EBA2440209C00BF393B /* ChannelSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EB92440209C00BF393B /* ChannelSectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,12 +73,6 @@
 		A6621E22243F02FD00BF393B /* MindValleyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MindValleyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6621E26243F02FD00BF393B /* MindValleyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindValleyTests.swift; sourceTree = "<group>"; };
 		A6621E28243F02FD00BF393B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A6621E33243F079F00BF393B /* ListUsersInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUsersInteractor.swift; sourceTree = "<group>"; };
-		A6621E34243F079F00BF393B /* ListUsersRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUsersRouter.swift; sourceTree = "<group>"; };
-		A6621E35243F079F00BF393B /* ListUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUsersViewController.swift; sourceTree = "<group>"; };
-		A6621E36243F079F00BF393B /* ListUsersPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUsersPresenter.swift; sourceTree = "<group>"; };
-		A6621E37243F079F00BF393B /* ListUsersInterfaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUsersInterfaces.swift; sourceTree = "<group>"; };
-		A6621E38243F079F00BF393B /* ListUsersDependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUsersDependency.swift; sourceTree = "<group>"; };
 		A6621E3A243F079F00BF393B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6621E3B243F079F00BF393B /* APIConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIConfiguration.plist; sourceTree = "<group>"; };
 		A6621E3F243F079F00BF393B /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
@@ -104,6 +104,18 @@
 		A6621E97243F318900BF393B /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		A6621E98243F318900BF393B /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		A6621E99243F318900BF393B /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		A6621EA0243F324800BF393B /* ChannelsInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsInterfaces.swift; sourceTree = "<group>"; };
+		A6621EA1243F324800BF393B /* ChannelsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsPresenter.swift; sourceTree = "<group>"; };
+		A6621EA2243F324800BF393B /* ChannelsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsRouter.swift; sourceTree = "<group>"; };
+		A6621EA3243F324800BF393B /* ChannelsDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsDependency.swift; sourceTree = "<group>"; };
+		A6621EA4243F324800BF393B /* ChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
+		A6621EA5243F324800BF393B /* ChannelsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsInteractor.swift; sourceTree = "<group>"; };
+		A6621EAC243F730A00BF393B /* String+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		A6621EAD243F730A00BF393B /* UIView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		A6621EAF243F730A00BF393B /* UITableView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
+		A6621EB4243F737400BF393B /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
+		A6621EB6243F738000BF393B /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		A6621EB92440209C00BF393B /* ChannelSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,22 +181,9 @@
 		A6621E31243F079F00BF393B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				A6621E32243F079F00BF393B /* ListUsers */,
+				A6621E9F243F323000BF393B /* Channels */,
 			);
 			path = Modules;
-			sourceTree = "<group>";
-		};
-		A6621E32243F079F00BF393B /* ListUsers */ = {
-			isa = PBXGroup;
-			children = (
-				A6621E33243F079F00BF393B /* ListUsersInteractor.swift */,
-				A6621E34243F079F00BF393B /* ListUsersRouter.swift */,
-				A6621E35243F079F00BF393B /* ListUsersViewController.swift */,
-				A6621E36243F079F00BF393B /* ListUsersPresenter.swift */,
-				A6621E37243F079F00BF393B /* ListUsersInterfaces.swift */,
-				A6621E38243F079F00BF393B /* ListUsersDependency.swift */,
-			);
-			path = ListUsers;
 			sourceTree = "<group>";
 		};
 		A6621E39243F079F00BF393B /* Resources */ = {
@@ -232,7 +231,12 @@
 		A6621E45243F079F00BF393B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A6621EAC243F730A00BF393B /* String+Ext.swift */,
+				A6621EAF243F730A00BF393B /* UITableView+Ext.swift */,
+				A6621EAD243F730A00BF393B /* UIView+Ext.swift */,
 				A6621E46243F079F00BF393B /* UIViewController+Ext.swift */,
+				A6621EB4243F737400BF393B /* UIFont+Ext.swift */,
+				A6621EB6243F738000BF393B /* UIColor+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -324,6 +328,28 @@
 				A6621E98243F318900BF393B /* Roboto-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		A6621E9F243F323000BF393B /* Channels */ = {
+			isa = PBXGroup;
+			children = (
+				A6621EB82440208000BF393B /* Views */,
+				A6621EA0243F324800BF393B /* ChannelsInterfaces.swift */,
+				A6621EA1243F324800BF393B /* ChannelsPresenter.swift */,
+				A6621EA2243F324800BF393B /* ChannelsRouter.swift */,
+				A6621EA3243F324800BF393B /* ChannelsDependency.swift */,
+				A6621EA4243F324800BF393B /* ChannelsViewController.swift */,
+				A6621EA5243F324800BF393B /* ChannelsInteractor.swift */,
+			);
+			path = Channels;
+			sourceTree = "<group>";
+		};
+		A6621EB82440208000BF393B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A6621EB92440209C00BF393B /* ChannelSectionCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,33 +461,39 @@
 				A6621E6C243F079F00BF393B /* NetworkConfiguration.swift in Sources */,
 				A6621E83243F094400BF393B /* ImageCache.swift in Sources */,
 				A6621E6D243F079F00BF393B /* UIViewController+Ext.swift in Sources */,
+				A6621EA6243F324800BF393B /* ChannelsInterfaces.swift in Sources */,
 				A6621E72243F079F00BF393B /* BaseViewController.swift in Sources */,
-				A6621E65243F079F00BF393B /* ListUsersDependency.swift in Sources */,
 				A6621E7A243F079F00BF393B /* KeyboardHelper.swift in Sources */,
-				A6621E60243F079F00BF393B /* ListUsersInteractor.swift in Sources */,
 				A6621E8D243F2C0B00BF393B /* Asset.swift in Sources */,
 				A6621E10243F02F900BF393B /* AppDelegate.swift in Sources */,
 				A6621E87243F269D00BF393B /* Category.swift in Sources */,
 				A6621E71243F079F00BF393B /* PresenterInterface.swift in Sources */,
 				A6621E73243F079F00BF393B /* ViewInterface.swift in Sources */,
 				A6621E85243F094C00BF393B /* ImageView.swift in Sources */,
-				A6621E62243F079F00BF393B /* ListUsersViewController.swift in Sources */,
+				A6621EA8243F324800BF393B /* ChannelsRouter.swift in Sources */,
+				A6621EAB243F324800BF393B /* ChannelsInteractor.swift in Sources */,
+				A6621EB5243F737400BF393B /* UIFont+Ext.swift in Sources */,
 				A6621E8B243F275000BF393B /* Media.swift in Sources */,
 				A6621E79243F079F00BF393B /* NameDescribable.swift in Sources */,
+				A6621EAA243F324800BF393B /* ChannelsViewController.swift in Sources */,
+				A6621EA9243F324800BF393B /* ChannelsDependency.swift in Sources */,
 				A6621E93243F2F6500BF393B /* ChannelsAPI.swift in Sources */,
 				A6621E68243F079F00BF393B /* NetworkClient.swift in Sources */,
 				A6621E77243F079F00BF393B /* ViewRouter.swift in Sources */,
-				A6621E64243F079F00BF393B /* ListUsersInterfaces.swift in Sources */,
+				A6621EA7243F324800BF393B /* ChannelsPresenter.swift in Sources */,
 				A6621E75243F079F00BF393B /* NavigationRouter.swift in Sources */,
-				A6621E61243F079F00BF393B /* ListUsersRouter.swift in Sources */,
+				A6621EB1243F730A00BF393B /* UIView+Ext.swift in Sources */,
 				A6621E89243F274000BF393B /* Channel.swift in Sources */,
 				A6621E6B243F079F00BF393B /* NetworkError.swift in Sources */,
 				A6621E78243F079F00BF393B /* Logger.swift in Sources */,
-				A6621E63243F079F00BF393B /* ListUsersPresenter.swift in Sources */,
 				A6621E74243F079F00BF393B /* NavigationController.swift in Sources */,
 				A6621E76243F079F00BF393B /* RouterInterfaces.swift in Sources */,
 				A6621E69243F079F00BF393B /* APIEndpoint.swift in Sources */,
 				A6621E8F243F2C7D00BF393B /* Series.swift in Sources */,
+				A6621EB3243F730A00BF393B /* UITableView+Ext.swift in Sources */,
+				A6621EB7243F738000BF393B /* UIColor+Ext.swift in Sources */,
+				A6621EBA2440209C00BF393B /* ChannelSectionCell.swift in Sources */,
+				A6621EB0243F730A00BF393B /* String+Ext.swift in Sources */,
 				A6621E81243F08AB00BF393B /* Reachablility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

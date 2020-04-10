@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum NestedKey {
+    static let data = "data"
+    static let categories = "categories"
+    static let channels = "channels"
+    static let media = "media"
+}
+
 enum ChannelsAPI {
     case fetchNewEpisodes
     case fetchChannels
@@ -31,5 +38,5 @@ extension ChannelsAPI: APIEndpoint {
 
     var parameters: Parameters? {
         return nil
-    } 
+    }
 }

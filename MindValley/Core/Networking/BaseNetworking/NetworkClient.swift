@@ -11,6 +11,7 @@ import Foundation
 /// A definition of a NetworkClient
 public protocol NetworkRequestable {
     func fetch<T: Decodable>(endPoint: APIEndpoint,
+                             type: T.Type,
                              loadFromCache: Bool,
                              completion: @escaping (Result<T, NetworkError>) -> Void)
 }
@@ -44,6 +45,7 @@ public final class NetworkClient: NetworkRequestable {
     ///   - type: The decode closure that expects a `Decodable` object and returns a relevant type
     ///   - completion: The completion handler of the request
     public func fetch<T: Decodable>(endPoint: APIEndpoint,
+                                    type: T.Type,
                                     loadFromCache: Bool,
                                     completion: @escaping NetworkClientResponse<T>) {
         guard let request = endPoint.buildRequest() else {

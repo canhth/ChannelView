@@ -8,6 +8,10 @@
 
 import Foundation
 
+struct Categories: Decodable {
+    let categories: [Category]
+}
+
 struct Category: Decodable {
     let name: String
 }

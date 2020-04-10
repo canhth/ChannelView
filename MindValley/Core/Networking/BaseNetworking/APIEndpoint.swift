@@ -67,6 +67,7 @@ private extension APIEndpoint {
     ///
     /// - Returns: The converted data
     func parametersToHttpBody() -> Data? {
-        return try? JSONSerialization.data(withJSONObject: parameters ?? [:], options: [])
+        guard let params = parameters else { return nil }
+        return try? JSONSerialization.data(withJSONObject: params, options: [])
     }
 }

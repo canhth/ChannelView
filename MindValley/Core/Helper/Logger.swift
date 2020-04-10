@@ -30,14 +30,12 @@ public extension Logger {
     }
 
     enum Level {
-        case verbose, debug, info, warning, error
+        case verbose, info, error
 
         var osLogType: OSLogType {
             switch self {
             case .verbose: return .default
-            case .debug: return .debug
             case .info: return .info
-            case .warning: return .error
             case .error: return .fault
             }
         }
@@ -45,9 +43,7 @@ public extension Logger {
         var emoji: String {
             switch self {
             case .verbose: return "⚛"
-            case .debug: return "🔵"
             case .info: return "✳️"
-            case .warning: return "⚠️"
             case .error: return "🆘"
             }
         }
@@ -55,9 +51,7 @@ public extension Logger {
         var prefix: String {
             switch self {
             case .verbose: return "VERBOSE"
-            case .debug: return "DEBUG"
             case .info: return "INFO"
-            case .warning: return "WARNING"
             case .error: return "ERROR"
             }
         }
@@ -134,38 +128,12 @@ public extension Logger {
             line: line)
     }
 
-    func debug(tag: Tag = .general,
-               object: Any,
-               filePath: String = #file,
-               function: String = #function,
-               line: Int = #line) {
-        log(.debug, tag: tag,
-            visibility: .public,
-            object: object,
-            filePath: filePath,
-            function: function,
-            line: line)
-    }
-
     func info(tag: Tag = .general,
               object: Any,
               filePath: String = #file,
               function: String = #function,
               line: Int = #line) {
         log(.info, tag: tag,
-            visibility: .public,
-            object: object,
-            filePath: filePath,
-            function: function,
-            line: line)
-    }
-
-    func warning(tag: Tag = .general,
-                 object: Any,
-                 filePath: String = #file,
-                 function: String = #function,
-                 line: Int = #line) {
-        log(.warning, tag: tag,
             visibility: .public,
             object: object,
             filePath: filePath,
