@@ -15,23 +15,30 @@ final class ChannelsPresenter {
 
     private unowned let view: ChannelsViewInterface
     private let interactor: ChannelsInteractorInterface
+    private let categoriesInteractor: CategoriesInteractorInterface
     private let router: ChannelsRouterInterface
 
     private var newEpisodes = [Media]() {
         didSet {
-            
+            view.reloadData()
         }
     }
     
     private var listChannels = [Channel]() {
         didSet {
-            
+            view.reloadData()
         }
     }
     
     private var categories = [Category]() {
         didSet {
-            
+            view.reloadData()
+        }
+    }
+    
+    private var isLoading = false {
+        didSet {
+            view.setLoadingVisible(isLoading)
         }
     }
     
@@ -39,14 +46,68 @@ final class ChannelsPresenter {
 
     init(view: ChannelsViewInterface,
          interactor: ChannelsInteractorInterface,
+         categoriesInteractor: CategoriesInteractorInterface,
          router: ChannelsRouterInterface) {
         self.view = view
         self.interactor = interactor
+        self.categoriesInteractor = categoriesInteractor
         self.router = router
     }
 
     func viewDidLoad() {
         fetchChannelsInfo()
+    }
+    
+    private func fetchNewEpisodesFromCache() {
+        interactor.fetchNewEpisodes(loadFromCache: true) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let medias):
+                self.newEpisodes = medias
+            case .failure(let error):
+                Logger.shared.error(object: error)
+            }
+            // Reload the new episode with latest data from sever.
+            self.fetchNewEpisode()
+        }
+    }
+    
+    private func fetchNewEpisode() {
+        isLoading = true
+        interactor.fetchNewEpisodes(loadFromCache: false) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let medias):
+                self.newEpisodes = medias
+            case .failure(let error):
+                Logger.shared.error(object: error)
+            }
+            self.isLoading = false
+        }
+    }
+    
+    private func fetchListChannels() {
+        interactor.fetchChannels(loadFromCache: false) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let channels):
+                self.listChannels = channels
+            case .failure(let error):
+                Logger.shared.error(object: error)
+            }
+        }
+    }
+    
+    private func fetchListCategories() {
+        categoriesInteractor.fetchCategories(fromCache: false) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let categories):
+                self.categories = categories
+            case .failure(let error):
+                Logger.shared.error(object: error)
+            }
+        }
     }
 }
 
@@ -89,13 +150,24 @@ extension ChannelsPresenter: ChannelsPresenterInterface {
         return listChannels[index]
     }
     
+    func listChannelItems() -> [Channel] {
+        return listChannels
+    }
+    
+    func listNewEpisodes() -> [Media] {
+        return newEpisodes
+    }
     
     func refreshAllChannels() {
-        
+        newEpisodes.removeAll()
+        listChannels.removeAll()
+        categories.removeAll()
+        fetchChannelsInfo()
     }
     
     func fetchChannelsInfo() {
-        
+        fetchNewEpisodesFromCache()
+        fetchListChannels()
+        fetchListCategories()
     }
-    
 }

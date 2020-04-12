@@ -9,9 +9,9 @@
 import Foundation
 
 struct IconAsset: Decodable {
-    let thumbnailUrl: String
+    let thumbnailUrl: String?
 }
 
 struct CoverAsset: Decodable {
-    let url: String
+    let url: String?
 }

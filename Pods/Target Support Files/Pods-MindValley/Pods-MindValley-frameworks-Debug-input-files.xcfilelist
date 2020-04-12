@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-MindValley/Pods-MindValley-frameworks.sh
+${BUILT_PRODUCTS_DIR}/HanekeSwift/Haneke.framework
+${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework

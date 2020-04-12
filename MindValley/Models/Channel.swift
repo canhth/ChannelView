@@ -14,7 +14,7 @@ enum ChannelType {
 }
 
 struct Channel: Decodable {
-    let id: String
+    let id: String?
     var series = [Series]()
     let title: String
     let mediaCount: Int
@@ -31,6 +31,6 @@ struct Channel: Decodable {
     }
     
     var type: ChannelType {
-        return series.count > 0 ? .series : .course
+        return !series.isEmpty ? .series : .course
     }
 }

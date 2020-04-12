@@ -30,15 +30,20 @@ extension UIViewController {
     /// - Parameter title: Navigation title
     func preferLargeTitleNavigationBar(enable: Bool,
                                        with title: String,
-                                       displayMode: UINavigationItem.LargeTitleDisplayMode = .always) {
+                                       displayMode: UINavigationItem.LargeTitleDisplayMode = .automatic) {
         navigationItem.title = title
-        navigationController?.view.backgroundColor = .white
-        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.setBackgroundImage(UIImage(color: AppColor.darkBackground), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.barTintColor = AppColor.darkBackground
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: AppColor.lightHeader
+        ]
         navigationController?.navigationBar.prefersLargeTitles = enable
         navigationController?.navigationItem.largeTitleDisplayMode = displayMode
         navigationController?.navigationBar.largeTitleTextAttributes = [
-            .foregroundColor: UIColor.black,
-            .font: UIFont.boldSystemFont(ofSize: 46)
+            .foregroundColor: AppColor.lightHeader,
+            .font: MVFont.headLine
         ]
     }
 }

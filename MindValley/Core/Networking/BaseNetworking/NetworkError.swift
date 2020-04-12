@@ -13,7 +13,7 @@ public enum NetworkError: Error {
     case unableToGenerateURLRequest
 
     /// Expected deserialization of the response failed.
-    case badDeserialization
+    case badDeserialization(error: Error)
 
     /// There was an invalid response from the network
     case invalidResponse
@@ -34,9 +34,9 @@ public extension NetworkError {
         case .unableToGenerateURLRequest:
             return NSLocalizedString("Unable to generate the URL request for the given options.",
                                      comment: "Unable to generate the URL request for the given options.")
-        case .badDeserialization:
+        case .badDeserialization(let error):
             return NSLocalizedString("Deserialization failed.",
-                                     comment: "Expected deserialization of the response failed.")
+                                     comment: error.localizedDescription)
         case .invalidResponse:
             return NSLocalizedString("Fetch error. Found invalid response.",
                                      comment: "There was an invalid response from the network.")

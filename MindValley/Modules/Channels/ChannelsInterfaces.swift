@@ -12,11 +12,11 @@ import Foundation
 
 // Dependency
 protocol ChannelsDependencyInterface {
-    func makeChannelsView() -> ChannelsViewInterface
+    func makeChannelsView() -> ViewInterface
 }
 
 // Router
-protocol ChannelsRouterInterface: ViewRouterInterface {
+protocol ChannelsRouterInterface: NavigationRouterInterface {
 }
 
 // ViewController
@@ -30,6 +30,8 @@ protocol ChannelsPresenterInterface: PresenterInterface {
     func numberOfSections() -> Int
     func numberOfCategories() -> Int
     func numberOfNewEpisodes() -> Int
+    func listChannelItems() -> [Channel]
+    func listNewEpisodes() -> [Media]
     func categoryAtIndex(index: Int) -> Category
     func newEpisodeAt(index: Int) -> Media
     func channelAtIndex(index: Int) -> Channel
@@ -41,11 +43,20 @@ protocol ChannelsPresenterInterface: PresenterInterface {
 protocol ChannelsInteractorInterface {
     func fetchNewEpisodes(loadFromCache: Bool, completion: @escaping (Result<[Media], NetworkError>) -> Void)
     func fetchChannels(loadFromCache: Bool, completion: @escaping (Result<[Channel], NetworkError>) -> Void)
-    func fetchCategories(completion: @escaping (Result<[Category], NetworkError>) -> Void)
 }
 
 enum ChannelSection: Int {
     case newEpisodes
     case channels
     case categories
+    
+    static func getSectionType(by index: Int, numberOfSections: Int) -> ChannelSection {
+        var sectionType: ChannelSection = .channels
+        if index == 0 {
+            sectionType = .newEpisodes
+        } else if index == numberOfSections - 1 {
+            sectionType = .categories
+        }
+        return sectionType
+    }
 }

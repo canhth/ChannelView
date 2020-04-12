@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-MindValleyTests/Pods-MindValleyTests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework
+${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework
+${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework

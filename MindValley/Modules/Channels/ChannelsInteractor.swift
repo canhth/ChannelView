@@ -11,6 +11,11 @@
 import Foundation
 
 final class ChannelsInteractor {
+    private typealias MediasResponse = [String: [String: [Media]]]
+    private typealias ChannelsResponse = [String: [String: [Channel]]]
+    
+    private let mediaLimit = 6
+    
     // MARK: - Private Properties
     private let networkClient: NetworkRequestable
 
@@ -25,36 +30,51 @@ final class ChannelsInteractor {
 
 extension ChannelsInteractor: ChannelsInteractorInterface {
     func fetchNewEpisodes(loadFromCache: Bool, completion: @escaping (Result<[Media], NetworkError>) -> Void) {
-        self.networkClient.fetch(endPoint: ChannelsAPI.fetchNewEpisodes, type: [String: [String: [Media]]].self, loadFromCache: false) { (result) in
-            switch result {
-            case .success(let categories):
-                print(categories[NestedKey.data]?[NestedKey.media])
-            case .failure(let error):
-                print(error)
-            }
+        self.networkClient.fetch(endPoint: ChannelsAPI.fetchNewEpisodes,
+                                 type: MediasResponse.self,
+                                 loadFromCache: loadFromCache) { (result) in
+                                    DispatchQueue.main.async {
+                                        switch result {
+                                        case .success(let resultData):
+                                            if let data = resultData[NestedKey.data],
+                                                let medias = data[NestedKey.media] {
+                                                completion(.success(medias))
+                                            } else {
+                                                completion(.success([]))
+                                            }
+                                        case .failure(let error):
+                                            completion(.failure(error))
+                                        }
+                                    }
         }
     }
     
     func fetchChannels(loadFromCache: Bool, completion: @escaping (Result<[Channel], NetworkError>) -> Void) {
-        self.networkClient.fetch(endPoint: ChannelsAPI.fetchChannels, type: [String: [String: [Channel]]].self, loadFromCache: false) { (result) in
-            switch result {
-            case .success(let categories):
-                print(categories[NestedKey.data]?[NestedKey.channels])
-            case .failure(let error):
-                print(error)
-            }
+        self.networkClient.fetch(endPoint: ChannelsAPI.fetchChannels,
+                                 type: ChannelsResponse.self,
+                                 loadFromCache: loadFromCache) { (result) in
+                                    DispatchQueue.main.async {
+                                        switch result {
+                                        case .success(let resultData):
+                                            if let data = resultData[NestedKey.data],
+                                                var channels = data[NestedKey.channels] {
+                                                // Filter list media not more than 6 items.
+                                                DispatchQueue.runBackgroundTask({
+                                                    for i in 0..<channels.count {
+                                                        if channels[i].latestMedia.count > mediaLimit {
+                                                            channels[i].latestMedia = Array(channels[i].latestMedia[0..<mediaLimit])
+                                                        }
+                                                    }
+                                                }, completion: {
+                                                    completion(.success(channels))
+                                                })
+                                            } else {
+                                                completion(.success([]))
+                                            }
+                                        case .failure(let error):
+                                            completion(.failure(error))
+                                        }
+                                    }
         }
     }
-    
-    func fetchCategories(completion: @escaping (Result<[Category], NetworkError>) -> Void) {
-        self.networkClient.fetch(endPoint: ChannelsAPI.fetchCategories, type: [String: [String: [Category]]].self, loadFromCache: false) { (result) in
-            switch result {
-            case .success(let categories):
-                print(categories[NestedKey.data]?[NestedKey.categories])
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
 }

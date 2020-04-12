@@ -69,7 +69,7 @@ private extension NavigationRouter {
     func validateOnPush(_ controller: UIViewController) -> Bool {
         switch controller {
         case is UINavigationController:
-            Logger.shared.warning(object: "can not push \(controller), which is UINavigationController.")
+            Logger.shared.error(object: "can not push \(controller), which is UINavigationController.")
             return false
         default:
             return true

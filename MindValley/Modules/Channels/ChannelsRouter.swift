@@ -10,7 +10,7 @@
 
 import UIKit
 
-final class ChannelsRouter: ViewRouter {
+final class ChannelsRouter: NavigationRouter {
 }
 
 // MARK: - ChannelsRouterInterface

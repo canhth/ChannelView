@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Haneke
 
 /// A definition of a NetworkClient
 public protocol NetworkRequestable {
@@ -25,17 +26,8 @@ public final class NetworkClient: NetworkRequestable {
     
     /// Creates an instance of network client
     ///
-    /// - Parameter session: The URLSession that coordinates a group of related network data transfer tasks
     public init(session: URLSession = URLSession.shared) {
         self.session = session
-        // Make sure to purge cache on memory pressure
-        let cacheDirectory = (NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0] as String).appendingFormat("/\(Bundle.main.bundleIdentifier ?? "cache")/" )
-        
-        let urlCache = URLCache(memoryCapacity: 50 * 1024 * 1024,
-                                diskCapacity: 500 * 1024 * 1024,
-                                diskPath: cacheDirectory)
-        
-        URLCache.shared = urlCache
     }
 
     /// Fetches a network request with a relevant `Decodable.Type`to decode the response.
@@ -57,7 +49,7 @@ public final class NetworkClient: NetworkRequestable {
         if loadFromCache || !Reachability.isConnectedToNetwork() {
             loadFromCached(endPoint: endPoint, request: request, completion: completion)
         }
-
+        
         let task = session.dataTask(with: request) { data, response, error in
             guard
                 let data = data,
@@ -77,10 +69,9 @@ public final class NetworkClient: NetworkRequestable {
                 completion(.failure(.noSuccessResponse(code: "\(httpResponse.statusCode)")))
                 return
             }
-
-            let cachedResponse = CachedURLResponse(response: response, data: data)
-            URLCache.shared.storeCachedResponse(cachedResponse, for: request)
             
+            Shared.dataCache.set(value: data, key: endPoint.fullURL)
+    
             self.parseData(endPoint: endPoint, data: data, completion: completion)
         }
 
@@ -93,9 +84,9 @@ public final class NetworkClient: NetworkRequestable {
     private func loadFromCached<T: Decodable>(endPoint: APIEndpoint,
                                               request: URLRequest,
                                               completion: @escaping NetworkClientResponse<T>) {
-        if let data = URLCache.shared.cachedResponse(for: request)?.data {
-            parseData(endPoint: endPoint, data: data, completion: completion)
-        } else {
+        Shared.dataCache.fetch(key: endPoint.fullURL).onSuccess { (data) in
+            self.parseData(endPoint: endPoint, data: data, completion: completion)
+        }.onFailure { (_) in
             completion(.failure(.cachedNotFound))
         }
     }
@@ -108,7 +99,7 @@ public final class NetworkClient: NetworkRequestable {
             let genericModel = try endPoint.jsonDecoder.decode(T.self, from: data)
             completion(.success(genericModel))
         } catch {
-            completion(.failure(.badDeserialization))
+            completion(.failure(.badDeserialization(error: error)))
         }
     }
 }

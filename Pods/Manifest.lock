@@ -1,0 +1,29 @@
+PODS:
+  - HanekeSwift (1.2)
+  - SkeletonView (1.8.7)
+
+DEPENDENCIES:
+  - HanekeSwift (from `https://github.com/Haneke/HanekeSwift.git`, branch `master`)
+  - SkeletonView
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SkeletonView
+
+EXTERNAL SOURCES:
+  HanekeSwift:
+    :branch: master
+    :git: https://github.com/Haneke/HanekeSwift.git
+
+CHECKOUT OPTIONS:
+  HanekeSwift:
+    :commit: 41c1efc82a9b7cefa4381f79669ab1e32b867b16
+    :git: https://github.com/Haneke/HanekeSwift.git
+
+SPEC CHECKSUMS:
+  HanekeSwift: 0ee43c4cfe871ef8cc7382bda8729b6374c41748
+  SkeletonView: ba5370f41280b2f0a76918bb143c1294232bb4f4
+
+PODFILE CHECKSUM: 0f98f43674195afd71ad9c46439f57eb724f1644
+
+COCOAPODS: 1.7.5

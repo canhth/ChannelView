@@ -29,3 +29,25 @@ extension UITableView {
         return cell
     }
 }
+ 
+extension UICollectionView {
+    /**
+     Convenience method to register a cell.
+     - Parameter cellClass: UICollectionViewCell class to register.
+     */
+    func register(_ cellClass: UICollectionViewCell.Type) {
+        register(cellClass, forCellWithReuseIdentifier: cellClass.typeName)
+    }
+    
+    /**
+     Convenience method to dequeue a cell knowing it conforms the NameDescribable protocol.
+     With this method we only have the fatalError in one place.
+     - Parameter indexPath: IndexPath to dequeue cell.
+     */
+    func dequeueReusableCell<T: UICollectionViewCell>(for indexPath: IndexPath) -> T {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: T.typeName, for: indexPath) as? T else {
+            fatalError("\(T.typeName) could not be dequeue")
+        }
+        return cell
+    }
+}

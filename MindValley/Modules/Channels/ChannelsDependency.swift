@@ -13,15 +13,23 @@ import UIKit
 final class ChannelsDependency: ChannelsDependencyInterface {
     // MARK: - Module Setup
 
-    func makeChannelsView() -> ChannelsViewInterface {
+    func makeChannelsView() -> ViewInterface {
         let view = ChannelsViewController()
 
         let interactor = ChannelsInteractor()
-        let router = ChannelsRouter(rootController: view)
-
-        let presenter = ChannelsPresenter(view: view, interactor: interactor, router: router)
+        let categoriesInteractor = CategoriesInteractor()
+        
+        let navigationController = NavigationController()
+        
+        let router = ChannelsRouter(rootController: navigationController)
+        router.setRootView(view, animated: false)
+        
+        let presenter = ChannelsPresenter(view: view,
+                                          interactor: interactor,
+                                          categoriesInteractor: categoriesInteractor,
+                                          router: router)
         view.presenter = presenter
 
-        return view
+        return router.toController()
     }
 }

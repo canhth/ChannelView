@@ -49,9 +49,14 @@ public extension APIEndpoint {
         var request = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 10)
         request.httpMethod = method.rawValue
         request.httpBody = parametersToHttpBody()
+        request.cachePolicy = .reloadRevalidatingCacheData
         request.timeoutInterval = 5 * 1000
         headers.forEach { request.addValue($0.value, forHTTPHeaderField: $0.key) }
         return request
+    }
+    
+    var fullURL: String {
+        return urlComponents?.url?.absoluteString ?? ""
     }
 }
 

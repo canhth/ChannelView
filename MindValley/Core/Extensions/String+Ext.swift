@@ -9,12 +9,12 @@
 import UIKit
 
 extension String {
-    func getEstimateFrame(width: CGFloat, height: CGFloat) -> CGSize {
+    func getEstimateFrame(width: CGFloat, height: CGFloat, font: UIFont) -> CGSize {
         let size = CGSize(width: width, height: height)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
         let estimateFrame = NSString(string: self).boundingRect(with: size,
                                                                 options: options,
-                                                                attributes: [.font: UIFont.systemFont(ofSize: 15)],
+                                                                attributes: [.font: font],
                                                                 context: nil)
         return estimateFrame.size
     }
