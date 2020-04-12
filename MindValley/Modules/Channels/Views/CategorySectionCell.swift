@@ -106,7 +106,7 @@ final class CategorySectionCell: UITableViewCell {
         collectionView.tag = index
     }
     
-    func configCell(with channel: Channel?, type: ChannelSection) {
+    func configCell() {
         categoriesTitleLabel.text = "Browse by categories"
         collectionView.reloadData()
     }

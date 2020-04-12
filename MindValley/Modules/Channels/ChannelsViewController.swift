@@ -43,7 +43,7 @@ final class ChannelsViewController: BaseViewController {
         refreshControl.addTarget(self,
                                  action: #selector(handleRefresh(_:)),
                                  for: .valueChanged)
-
+        refreshControl.tintColor = AppColor.white
         return refreshControl
     }()
     
@@ -51,6 +51,7 @@ final class ChannelsViewController: BaseViewController {
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
         indicator.style = .medium
+        indicator.tintColor = AppColor.white
         return indicator
     }()
     
@@ -160,22 +161,20 @@ extension ChannelsViewController: UITableViewDataSource {
         switch sectionType {
         case .newEpisodes:
             let cell: ChannelSectionCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.collectionViewHeight.constant = maxHeightOfNewEpisodes
+            cell.collectionViewHeight.constant = maxHeightOfNewEpisodes 
             cell.configCell(with: nil, type: .newEpisodes)
-            
             return cell
             
         case .channels:
             let cell: ChannelSectionCell = tableView.dequeueReusableCell(for: indexPath)
             cell.collectionViewHeight.constant = maxHeightOfChannels[indexPath.row - 1] ?? 0
             cell.configCell(with: presenter.channelAtIndex(index: indexPath.row - 1), type: .channels)
-            
             return cell
             
         case .categories:
             let cell: CategorySectionCell = tableView.dequeueReusableCell(for: indexPath)
             cell.collectionViewHeight.constant = maxHeightOfCategories
-            cell.configCell(with: nil, type: .categories)
+            cell.configCell()
             return cell
         }
     }
@@ -271,9 +270,10 @@ extension ChannelsViewController: UICollectionViewDelegateFlowLayout {
                                                         numberOfSections: presenter.numberOfSections())
       
         var width = DesignConstraints.courseItemWidth
-
+        
         switch section {
         case .newEpisodes:
+            // Item size for Episode
             return CGSize(width: width,
                           height: maxHeightOfNewEpisodes)
             
@@ -282,12 +282,14 @@ extension ChannelsViewController: UICollectionViewDelegateFlowLayout {
             switch channel.type {
             case .course:  break
             case .series:
+                // Change width for Series layout
                 width = DesignConstraints.seriesItemWidth
             }
             return CGSize(width: width,
                           height: maxHeightOfChannels[collectionView.tag - 1] ?? 0)
             
         case .categories:
+            // Item size for Category
             return CGSize(width: CategorySectionCell.DesignConstraints.categoryItemWidth,
                           height: CategorySectionCell.DesignConstraints.categoryItemHeight)
         }

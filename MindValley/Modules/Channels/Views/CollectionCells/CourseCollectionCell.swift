@@ -108,18 +108,18 @@ class CourseCollectionCell: UICollectionViewCell {
         
         // Title height
         height += media.title.getEstimateFrame(width: width - Constraints.basePadding,
-                                               height: 300,
+                                               height: 500,
                                                font: DesignConstraints.titleFont).height
         height += Constraints.basePadding
         
         // Sub title height
         if !media.channelName.isEmpty {
             height += media.channelName.getEstimateFrame(width: width - Constraints.basePadding,
-                                                         height: 300,
+                                                         height: 500,
                                                          font: DesignConstraints.subTitleFont).height
             height += Constraints.basePadding
         }
         
-        return height - 1
+        return height
     }
 }

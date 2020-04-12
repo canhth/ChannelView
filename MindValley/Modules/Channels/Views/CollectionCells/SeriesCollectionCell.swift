@@ -47,11 +47,11 @@ final class SeriesCollectionCell: CourseCollectionCell {
         var height = ceil(width * DesignConstraints.seriesCoverMultiplier)
         
         // Title height
-        height += series.title.getEstimateFrame(width: width - Constraints.basePadding,
-                                                height: 300,
+        height += series.title.getEstimateFrame(width: width,
+                                                height: 500,
                                                 font: DesignConstraints.titleFont).height
         height += Constraints.basePadding
         
-        return height - 1
+        return height
     }
 }

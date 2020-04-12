@@ -18,29 +18,17 @@ final class ChannelsPresenter {
     private let categoriesInteractor: CategoriesInteractorInterface
     private let router: ChannelsRouterInterface
 
-    private var newEpisodes = [Media]() {
-        didSet {
-            view.reloadData()
-        }
-    }
-    
-    private var listChannels = [Channel]() {
-        didSet {
-            view.reloadData()
-        }
-    }
-    
-    private var categories = [Category]() {
-        didSet {
-            view.reloadData()
-        }
-    }
+    private var newEpisodes = [Media]()
+    private var listChannels = [Channel]()
+    private var categories = [Category]()
     
     private var isLoading = false {
         didSet {
             view.setLoadingVisible(isLoading)
         }
     }
+    
+    private let dispatchGroup = DispatchGroup()
     
     // MARK: - LifeCycle
 
@@ -64,6 +52,7 @@ final class ChannelsPresenter {
             switch result {
             case .success(let medias):
                 self.newEpisodes = medias
+                self.view.reloadData()
             case .failure(let error):
                 Logger.shared.error(object: error)
             }
@@ -74,6 +63,7 @@ final class ChannelsPresenter {
     
     private func fetchNewEpisode() {
         isLoading = true
+        dispatchGroup.enter()
         interactor.fetchNewEpisodes(loadFromCache: false) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -83,10 +73,12 @@ final class ChannelsPresenter {
                 Logger.shared.error(object: error)
             }
             self.isLoading = false
+            self.dispatchGroup.leave()
         }
     }
     
     private func fetchListChannels() {
+        dispatchGroup.enter()
         interactor.fetchChannels(loadFromCache: false) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -95,10 +87,12 @@ final class ChannelsPresenter {
             case .failure(let error):
                 Logger.shared.error(object: error)
             }
+            self.dispatchGroup.leave()
         }
     }
     
     private func fetchListCategories() {
+        dispatchGroup.enter()
         categoriesInteractor.fetchCategories(fromCache: false) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -107,6 +101,7 @@ final class ChannelsPresenter {
             case .failure(let error):
                 Logger.shared.error(object: error)
             }
+            self.dispatchGroup.leave()
         }
     }
 }
@@ -114,17 +109,6 @@ final class ChannelsPresenter {
 // MARK: - ChannelsPresenterInterface
 
 extension ChannelsPresenter: ChannelsPresenterInterface {
-    
-    private func loadNewEpisodeFromCache() {
-        interactor.fetchNewEpisodes(loadFromCache: true) { (result) in
-            switch result {
-            case .success(let episodes):
-                self.newEpisodes = episodes
-            case .failure(let error):
-                Logger.shared.error(object: error)
-            }
-        }
-    }
     
     func numberOfSections() -> Int {
         return listChannels.count + (categories.isEmpty ? 0 : 1) + (newEpisodes.isEmpty ? 0 : 1)
@@ -166,8 +150,14 @@ extension ChannelsPresenter: ChannelsPresenterInterface {
     }
     
     func fetchChannelsInfo() {
+        
         fetchNewEpisodesFromCache()
         fetchListChannels()
         fetchListCategories()
+        
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            guard let self = self else { return }
+            self.view.reloadData()
+        }
     }
 }
