@@ -9,27 +9,28 @@
 import UIKit
 import Haneke
 
-class ChannelSectionCell: UITableViewCell {
+final class ChannelSectionCell: UITableViewCell {
     
     private enum DesignConstraints {
         static let titlePadding: CGFloat = 14
         static let collectionPadding: CGFloat = 16
         static let logoImageSize = CGSize(width: 50, height: 50)
     }
+    // MARK: IBOutlets
     
     var collectionViewOffset: CGFloat {
         get { return collectionView.contentOffset.x }
         set { collectionView.contentOffset.x = newValue }
     }
     
-    private var channelTitleLabel: UILabel = {
+    private let channelTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppColor.lightHeader
         label.font = MVFont.section
         return label
     }()
     
-    private var mediaNumberLabel: UILabel = {
+    private let mediaNumberLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppColor.lightMedium
         label.font = MVFont.subTitle
@@ -63,7 +64,7 @@ class ChannelSectionCell: UITableViewCell {
         return stackView
     }()
     
-    private var separateView: UIView = {
+    private let separateView: UIView = {
         let view = UIView()
         view.backgroundColor = AppColor.separate
         return view
@@ -72,27 +73,22 @@ class ChannelSectionCell: UITableViewCell {
     private(set) lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumLineSpacing = 20
+        flowLayout.minimumLineSpacing = Constraints.paddingX2
         flowLayout.headerReferenceSize = .zero
         flowLayout.footerReferenceSize = .zero
         flowLayout.sectionInset = UIEdgeInsets(top: 0,
-                                               left: Constraints.basePadding,
+                                               left: Constraints.paddingX2,
                                                bottom: 0,
-                                               right: Constraints.basePadding)
-        flowLayout.estimatedItemSize = .zero
+                                               right: Constraints.paddingX2)
          
         let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: flowLayout)
-        collectionView.register(MediaCollectionCell.self,
-                                forCellWithReuseIdentifier: MediaCollectionCell.typeName)
-        collectionView.register(CategoryCollectionCell.self,
-                                forCellWithReuseIdentifier: CategoryCollectionCell.typeName)
+        collectionView.register(CourseCollectionCell.self,
+                                forCellWithReuseIdentifier: CourseCollectionCell.typeName)
+        collectionView.register(SeriesCollectionCell.self,
+                                forCellWithReuseIdentifier: SeriesCollectionCell.typeName)
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.allowsSelection = false 
-        collectionView.contentInset = UIEdgeInsets(top: 0,
-                                                   left: Constraints.basePadding,
-                                                   bottom: 0,
-                                                   right: Constraints.basePadding)
+        collectionView.allowsSelection = false
 
         collectionView.backgroundColor = AppColor.darkBackground
         return collectionView
@@ -100,7 +96,9 @@ class ChannelSectionCell: UITableViewCell {
     
     lazy var collectionViewHeight = NSLayoutConstraint()
     
-    // MARK: - Public functions
+    
+    // MARK: - LifeCycle
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -110,7 +108,7 @@ class ChannelSectionCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override public func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         channelTitleLabel.text = ""
         logoImageView.hnk_cancelSetImage()
@@ -148,6 +146,8 @@ class ChannelSectionCell: UITableViewCell {
             .set(active: true)
     }
     
+    // MARK: - Public functions
+    
     func setupCollectionViewDataSource(dataSource: UICollectionViewDataSource & UICollectionViewDelegateFlowLayout,
                                        index: Int) {
         collectionView.dataSource = dataSource
@@ -161,6 +161,7 @@ class ChannelSectionCell: UITableViewCell {
             separateView.isHidden = type == .newEpisodes
             logoImageView.isHidden = true
             mediaNumberLabel.isHidden = true
+            
             channelTitleLabel.textColor = AppColor.lightHeader
             channelTitleLabel.font = MVFont.section
             channelTitleLabel.text = (type == .newEpisodes) ? "New Episodes" : "Browse by categories"
@@ -168,14 +169,24 @@ class ChannelSectionCell: UITableViewCell {
         case .channels:
             logoImageView.isHidden = false
             mediaNumberLabel.isHidden = false
+            separateView.isHidden = false
             channelTitleLabel.text = channel?.title
             channelTitleLabel.textColor = AppColor.white
             channelTitleLabel.font = MVFont.channelSection
-            mediaNumberLabel.text = "\(channel?.mediaCount ?? 0) episodes"
+            
             if let iconURL = channel?.iconURL, let URL = URL(string: iconURL) {
                 logoImageView.hnk_setImageFromURL(URL, format: Format<UIImage>.init(name: "original"))
             } else {
-                logoImageView.isHidden = true
+                logoImageView.image = UIImage(named: "default_icon")
+            }
+            
+            switch channel?.type {
+            case .course:
+                mediaNumberLabel.text = (channel?.mediaCount ?? 0).toStringWithPattern("episode")
+            case .series:
+                mediaNumberLabel.text = (channel?.series.count ?? 0).toStringWithPattern("serie")
+            case .none:
+                break
             }
         }
         collectionView.reloadData()

@@ -10,6 +10,7 @@ import Foundation
 
 struct IconAsset: Decodable {
     let thumbnailUrl: String?
+    let url: String?
 }
 
 struct CoverAsset: Decodable {

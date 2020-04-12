@@ -20,6 +20,8 @@ enum MVFont {
     
     static let title = bold(ofSize: 17)
     
+    static let category = bold(ofSize: 18)
+    
     static let subTitle = bold(ofSize: 13)
     
     private enum Roboto {

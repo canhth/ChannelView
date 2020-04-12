@@ -23,7 +23,7 @@ struct Channel: Decodable {
     let coverAsset: CoverAsset?
     
     var iconURL: String? {
-        return iconAsset?.thumbnailUrl
+        return iconAsset?.thumbnailUrl ?? iconAsset?.url
     }
     
     var coverURL: String? {

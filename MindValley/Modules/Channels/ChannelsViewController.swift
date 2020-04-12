@@ -11,13 +11,22 @@
 import UIKit
 
 final class ChannelsViewController: BaseViewController {
+    
+    private enum DesignConstraints {
+        static let courseItemWidth = (UIScreen.main.bounds.width - (4 * Constraints.paddingX2)) / 2
+        static let seriesItemWidth = UIScreen.main.bounds.width - (3 * Constraints.paddingX2)
+    }
+    
     // MARK: - Public Properties
 
     var presenter: ChannelsPresenterInterface!
     
+    // MARK: IBOutlets
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.register(ChannelSectionCell.self)
+        tableView.register(CategorySectionCell.self)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 150
         tableView.separatorStyle = .none
@@ -83,19 +92,32 @@ final class ChannelsViewController: BaseViewController {
     }
     
     private func calculateHeightForSections() {
-        let width = (UIScreen.main.bounds.width - (4 * Constraints.paddingX2)) / 2
-        
+        // Calculating max height for New Episodes section
         maxHeightOfNewEpisodes = presenter.listNewEpisodes().compactMap {
-            MediaCollectionCell.getHeightOfCollectionCell(media: $0,
-                                                          width: width)
+            CourseCollectionCell.getHeightOfCourseCell(media: $0,
+                                                       width: DesignConstraints.courseItemWidth)
         }.max() ?? 0
         
+        // Calculating max height for Channel sections
         for i in 0..<presenter.listChannelItems().count {
-            maxHeightOfChannels[i] = presenter.listChannelItems()[i].latestMedia.compactMap {
-                MediaCollectionCell.getHeightOfCollectionCell(media: $0,
-                                                              width: width)
-            }.max() ?? 0
+            let channel = presenter.listChannelItems()[i]
+            switch channel.type {
+            case .course:
+                maxHeightOfChannels[i] = channel.latestMedia.compactMap {
+                    CourseCollectionCell.getHeightOfCourseCell(media: $0,
+                                                               width: DesignConstraints.courseItemWidth)
+                }.max() ?? 0
+                
+            case .series:
+                maxHeightOfChannels[i] = channel.series.compactMap {
+                    SeriesCollectionCell.getHeightOfSeriesCell(series: $0,
+                                                               width: DesignConstraints.seriesItemWidth)
+                }.max() ?? 0
+            }
         }
+        
+        // Calculating max height for Categories section
+        maxHeightOfCategories = CategorySectionCell.getTotalHeightWith(presenter.numberOfCategories())
     }
 }
 
@@ -142,14 +164,16 @@ extension ChannelsViewController: UITableViewDataSource {
             cell.configCell(with: nil, type: .newEpisodes)
             
             return cell
+            
         case .channels:
             let cell: ChannelSectionCell = tableView.dequeueReusableCell(for: indexPath)
             cell.collectionViewHeight.constant = maxHeightOfChannels[indexPath.row - 1] ?? 0
             cell.configCell(with: presenter.channelAtIndex(index: indexPath.row - 1), type: .channels)
             
             return cell
+            
         case .categories:
-            let cell: ChannelSectionCell = tableView.dequeueReusableCell(for: indexPath)
+            let cell: CategorySectionCell = tableView.dequeueReusableCell(for: indexPath)
             cell.collectionViewHeight.constant = maxHeightOfCategories
             cell.configCell(with: nil, type: .categories)
             return cell
@@ -162,9 +186,12 @@ extension ChannelsViewController: UITableViewDataSource {
 extension ChannelsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let tableViewCell = cell as? ChannelSectionCell else { return }
-        tableViewCell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
-        tableViewCell.setupCollectionViewDataSource(dataSource: self, index: indexPath.row)
+        if let tableViewCell = cell as? ChannelSectionCell {
+            tableViewCell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
+            tableViewCell.setupCollectionViewDataSource(dataSource: self, index: indexPath.row)
+        } else if let categoryCell = cell as? CategorySectionCell {
+            categoryCell.setupCollectionViewDataSource(dataSource: self, index: indexPath.row)
+        }
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -182,8 +209,16 @@ extension ChannelsViewController: UICollectionViewDataSource {
         switch section {
         case .newEpisodes:
             return presenter.numberOfNewEpisodes()
+
         case .channels:
-            return presenter.channelAtIndex(index: collectionView.tag - 1).latestMedia.count
+            let channel = presenter.channelAtIndex(index: collectionView.tag - 1)
+            switch channel.type {
+            case .course:
+                return channel.latestMedia.count
+            case .series:
+                return channel.series.count
+            }
+
         case .categories:
             return presenter.numberOfCategories()
         }
@@ -192,16 +227,36 @@ extension ChannelsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let section = ChannelSection.getSectionType(by: collectionView.tag,
                                                         numberOfSections: presenter.numberOfSections())
-        let cell: MediaCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
+        
         switch section {
+            // New Episodes section
         case .newEpisodes:
+            let cell: CourseCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
             cell.configCell(with: presenter.newEpisodeAt(index: indexPath.row))
             
             return cell
+            
+            // Channel section
         case .channels:
-            cell.configCell(with: presenter.channelAtIndex(index: collectionView.tag - 1).latestMedia[indexPath.row])
-            return cell
+            let channel = presenter.channelAtIndex(index: collectionView.tag - 1)
+            switch channel.type {
+            case .course:
+                // Course layout
+                let cell: CourseCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
+                cell.configCell(with: channel.latestMedia[indexPath.row])
+                return cell
+                
+            case .series:
+                // Series layout
+                let cell: SeriesCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
+                cell.configCell(with: channel.series[indexPath.row])
+                return cell
+            }
+            
+            // Categories section
         case .categories:
+            let cell: CategoryCollectionCell = collectionView.dequeueReusableCell(for: indexPath)
+            cell.configCell(category: presenter.categoryAtIndex(index: indexPath.row))
             return cell
         }
     }
@@ -210,24 +265,32 @@ extension ChannelsViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension ChannelsViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let section = ChannelSection.getSectionType(by: collectionView.tag,
                                                         numberOfSections: presenter.numberOfSections())
       
-        let width = (UIScreen.main.bounds.width - (4 * Constraints.paddingX2)) / 2
-        var height: CGFloat = 0
+        var width = DesignConstraints.courseItemWidth
+
         switch section {
         case .newEpisodes:
-            height = maxHeightOfNewEpisodes
+            return CGSize(width: width,
+                          height: maxHeightOfNewEpisodes)
+            
         case .channels:
-            height = maxHeightOfChannels[collectionView.tag - 1] ?? 0
+            let channel = presenter.channelAtIndex(index: collectionView.tag - 1)
+            switch channel.type {
+            case .course:  break
+            case .series:
+                width = DesignConstraints.seriesItemWidth
+            }
+            return CGSize(width: width,
+                          height: maxHeightOfChannels[collectionView.tag - 1] ?? 0)
+            
         case .categories:
-            height = maxHeightOfCategories
+            return CGSize(width: CategorySectionCell.DesignConstraints.categoryItemWidth,
+                          height: CategorySectionCell.DesignConstraints.categoryItemHeight)
         }
-        
-        let cellSize = CGSize(width: width,
-                              height: height - 1)
-        return cellSize
     }
 }
  

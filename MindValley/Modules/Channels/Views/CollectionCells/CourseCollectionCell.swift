@@ -1,5 +1,5 @@
 //
-//  MediaCollectionCell.swift
+//  CourseCollectionCell.swift
 //  MindValley
 //
 //  Created by Canh Tran Wizeline on 4/10/20.
@@ -9,18 +9,18 @@
 import UIKit
 import Haneke
 
-final class MediaCollectionCell: UICollectionViewCell {
+class CourseCollectionCell: UICollectionViewCell {
     
     private enum DesignConstraints {
         static let titlePadding: CGFloat = 14
-        static let coverCourseImageSize = CGSize(width: 50, height: 50)
-        static let coverEpisoImageSize = CGSize(width: 50, height: 50)
         static let titleFont = MVFont.title
         static let subTitleFont = MVFont.subTitle
-        static let coverMultiplier: CGFloat = 1.5
+        static let courseCoverMultiplier: CGFloat = 1.5
     }
     
-    private var mediaTitleLabel: UILabel = {
+    // MARK: IBOutlets
+    
+    let mediaTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppColor.white
         label.font = DesignConstraints.titleFont
@@ -28,7 +28,7 @@ final class MediaCollectionCell: UICollectionViewCell {
         return label
     }()
     
-    private var mediaSubTitleLabel: UILabel = {
+    let mediaSubTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppColor.lightMedium
         label.font = DesignConstraints.subTitleFont
@@ -36,7 +36,7 @@ final class MediaCollectionCell: UICollectionViewCell {
         return label
     }()
     
-    private let coverImageView: UIImageView = {
+    let coverImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = Constraints.basePadding
@@ -44,7 +44,7 @@ final class MediaCollectionCell: UICollectionViewCell {
         return imageView
     }()
     
-    private lazy var mediaTitleStackView: UIStackView = {
+    lazy var mediaTitleStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [mediaTitleLabel,
                                                        mediaSubTitleLabel])
         stackView.spacing = Constraints.basePadding
@@ -54,9 +54,11 @@ final class MediaCollectionCell: UICollectionViewCell {
         return stackView
     }()
     
+    // MARK: - LifeCycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        setupViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -69,11 +71,13 @@ final class MediaCollectionCell: UICollectionViewCell {
         coverImageView.image = nil
     }
     
-    private func setupView() {
+    // MARK: Setups
+    
+    func setupViews() {
         addSubview(coverImageView)
         coverImageView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor) 
         coverImageView.heightAnchor.constraint(equalTo: coverImageView.widthAnchor,
-                                               multiplier: DesignConstraints.coverMultiplier)
+                                               multiplier: DesignConstraints.courseCoverMultiplier)
             .set(active: true)
         
         addSubview(mediaTitleStackView)
@@ -91,16 +95,16 @@ final class MediaCollectionCell: UICollectionViewCell {
         if let iconURL = media.coverURL, let URL = URL(string: iconURL) {
             coverImageView.hnk_setImageFromURL(URL, format: Format<UIImage>.init(name: "original"))
         } else {
-            coverImageView.isHidden = true
+            coverImageView.image = UIImage(named: "default_icon")
         }
-        mediaTitleLabel.text = media.title// + " " + media.title
+        mediaTitleLabel.text = media.title
         mediaSubTitleLabel.text = media.channelName.uppercased()
         mediaSubTitleLabel.isHidden = media.channelName.isEmpty
     }
     
-    static func getHeightOfCollectionCell(media: Media, width: CGFloat) -> CGFloat {
+    static func getHeightOfCourseCell(media: Media, width: CGFloat) -> CGFloat {
         // Image height
-        var height = width * DesignConstraints.coverMultiplier
+        var height = width * DesignConstraints.courseCoverMultiplier
         
         // Title height
         height += media.title.getEstimateFrame(width: width - Constraints.basePadding,
@@ -116,6 +120,6 @@ final class MediaCollectionCell: UICollectionViewCell {
             height += Constraints.basePadding
         }
         
-        return height 
+        return height - 1
     }
 }

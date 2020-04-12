@@ -58,14 +58,16 @@
 		A6621EC52440212700BF393B /* CategoriesDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EBF2440212700BF393B /* CategoriesDependency.swift */; };
 		A6621EC62440212700BF393B /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EC02440212700BF393B /* CategoriesViewController.swift */; };
 		A6621EC72440212700BF393B /* CategoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EC12440212700BF393B /* CategoriesInteractor.swift */; };
-		A6621ECB244023F500BF393B /* MediaCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621ECA244023F500BF393B /* MediaCollectionCell.swift */; };
+		A6621ECB244023F500BF393B /* CourseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621ECA244023F500BF393B /* CourseCollectionCell.swift */; };
 		A6621ECD2440240E00BF393B /* ChannelSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621ECC2440240E00BF393B /* ChannelSectionCell.swift */; };
 		A6621ECF24402D6800BF393B /* CGFloat+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621ECE24402D6800BF393B /* CGFloat+Ext.swift */; };
 		A6621ED12440309B00BF393B /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621ED02440309B00BF393B /* Constraints.swift */; };
 		A6621ED4244031AC00BF393B /* CategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621ED3244031AC00BF393B /* CategoryCollectionCell.swift */; };
-		A6621EF124405BAA00BF393B /* SimpleChannelSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EF024405BAA00BF393B /* SimpleChannelSectionCell.swift */; };
+		A6621EF124405BAA00BF393B /* CategorySectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6621EF024405BAA00BF393B /* CategorySectionCell.swift */; };
 		A6A0AAD72442FBB7006F92C5 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0AAD62442FBB7006F92C5 /* UIImage+Ext.swift */; };
 		A6A0AAD924432F8C006F92C5 /* Dispatch+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0AAD824432F8C006F92C5 /* Dispatch+Ext.swift */; };
+		A6A0AADE2443594C006F92C5 /* SeriesCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0AADD2443594C006F92C5 /* SeriesCollectionCell.swift */; };
+		A6A0AAE024436492006F92C5 /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0AADF24436492006F92C5 /* Int+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,14 +138,16 @@
 		A6621EBF2440212700BF393B /* CategoriesDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesDependency.swift; sourceTree = "<group>"; };
 		A6621EC02440212700BF393B /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		A6621EC12440212700BF393B /* CategoriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesInteractor.swift; sourceTree = "<group>"; };
-		A6621ECA244023F500BF393B /* MediaCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCollectionCell.swift; sourceTree = "<group>"; };
+		A6621ECA244023F500BF393B /* CourseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCollectionCell.swift; sourceTree = "<group>"; };
 		A6621ECC2440240E00BF393B /* ChannelSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSectionCell.swift; sourceTree = "<group>"; };
 		A6621ECE24402D6800BF393B /* CGFloat+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Ext.swift"; sourceTree = "<group>"; };
 		A6621ED02440309B00BF393B /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		A6621ED3244031AC00BF393B /* CategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionCell.swift; sourceTree = "<group>"; };
-		A6621EF024405BAA00BF393B /* SimpleChannelSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleChannelSectionCell.swift; sourceTree = "<group>"; };
+		A6621EF024405BAA00BF393B /* CategorySectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionCell.swift; sourceTree = "<group>"; };
 		A6A0AAD62442FBB7006F92C5 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		A6A0AAD824432F8C006F92C5 /* Dispatch+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dispatch+Ext.swift"; sourceTree = "<group>"; };
+		A6A0AADD2443594C006F92C5 /* SeriesCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesCollectionCell.swift; sourceTree = "<group>"; };
+		A6A0AADF24436492006F92C5 /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
 		DA2F9EAD867D3043B3143DEC /* Pods-MindValleyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindValleyTests.release.xcconfig"; path = "Target Support Files/Pods-MindValleyTests/Pods-MindValleyTests.release.xcconfig"; sourceTree = "<group>"; };
 		E63C1A33FD0730587789A6A5 /* Pods-MindValley.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindValley.release.xcconfig"; path = "Target Support Files/Pods-MindValley/Pods-MindValley.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -283,6 +287,7 @@
 				A6621ECE24402D6800BF393B /* CGFloat+Ext.swift */,
 				A6A0AAD62442FBB7006F92C5 /* UIImage+Ext.swift */,
 				A6A0AAD824432F8C006F92C5 /* Dispatch+Ext.swift */,
+				A6A0AADF24436492006F92C5 /* Int+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -385,9 +390,9 @@
 		A6621EB82440208000BF393B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A6621ECA244023F500BF393B /* MediaCollectionCell.swift */,
+				A6A0AADA2443590D006F92C5 /* CollectionCells */,
 				A6621ECC2440240E00BF393B /* ChannelSectionCell.swift */,
-				A6621EF024405BAA00BF393B /* SimpleChannelSectionCell.swift */,
+				A6621EF024405BAA00BF393B /* CategorySectionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -412,6 +417,15 @@
 				A6621ED3244031AC00BF393B /* CategoryCollectionCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A6A0AADA2443590D006F92C5 /* CollectionCells */ = {
+			isa = PBXGroup;
+			children = (
+				A6621ECA244023F500BF393B /* CourseCollectionCell.swift */,
+				A6A0AADD2443594C006F92C5 /* SeriesCollectionCell.swift */,
+			);
+			path = CollectionCells;
 			sourceTree = "<group>";
 		};
 		D4C65AD6E7967C141DF3BEB3 /* Pods */ = {
@@ -630,8 +644,10 @@
 				A6621EB1243F730A00BF393B /* UIView+Ext.swift in Sources */,
 				A6621E89243F274000BF393B /* Channel.swift in Sources */,
 				A6621EC52440212700BF393B /* CategoriesDependency.swift in Sources */,
-				A6621EF124405BAA00BF393B /* SimpleChannelSectionCell.swift in Sources */,
+				A6A0AADE2443594C006F92C5 /* SeriesCollectionCell.swift in Sources */,
+				A6621EF124405BAA00BF393B /* CategorySectionCell.swift in Sources */,
 				A6621E6B243F079F00BF393B /* NetworkError.swift in Sources */,
+				A6A0AAE024436492006F92C5 /* Int+Ext.swift in Sources */,
 				A6621ECF24402D6800BF393B /* CGFloat+Ext.swift in Sources */,
 				A6621E78243F079F00BF393B /* Logger.swift in Sources */,
 				A6621E74243F079F00BF393B /* NavigationController.swift in Sources */,
@@ -641,7 +657,7 @@
 				A6621E8F243F2C7D00BF393B /* Series.swift in Sources */,
 				A6621EB3243F730A00BF393B /* UITableView+Ext.swift in Sources */,
 				A6621EB7243F738000BF393B /* UIColor+Ext.swift in Sources */,
-				A6621ECB244023F500BF393B /* MediaCollectionCell.swift in Sources */,
+				A6621ECB244023F500BF393B /* CourseCollectionCell.swift in Sources */,
 				A6621EC32440212700BF393B /* CategoriesPresenter.swift in Sources */,
 				A6621EB0243F730A00BF393B /* String+Ext.swift in Sources */,
 				A6A0AAD72442FBB7006F92C5 /* UIImage+Ext.swift in Sources */,

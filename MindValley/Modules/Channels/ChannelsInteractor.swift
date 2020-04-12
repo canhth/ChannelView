@@ -37,7 +37,11 @@ extension ChannelsInteractor: ChannelsInteractorInterface {
                                         switch result {
                                         case .success(let resultData):
                                             if let data = resultData[NestedKey.data],
-                                                let medias = data[NestedKey.media] {
+                                                var medias = data[NestedKey.media] {
+                                                // Filter the maximum list of medias is 6
+                                                if medias.count > self.mediaLimit {
+                                                    medias = Array(medias[0..<self.mediaLimit])
+                                                }
                                                 completion(.success(medias))
                                             } else {
                                                 completion(.success([]))
@@ -60,11 +64,7 @@ extension ChannelsInteractor: ChannelsInteractorInterface {
                                                 var channels = data[NestedKey.channels] {
                                                 // Filter list media not more than 6 items.
                                                 DispatchQueue.runBackgroundTask({
-                                                    for i in 0..<channels.count {
-                                                        if channels[i].latestMedia.count > mediaLimit {
-                                                            channels[i].latestMedia = Array(channels[i].latestMedia[0..<mediaLimit])
-                                                        }
-                                                    }
+                                                    self.filterChannelsData(channels: &channels)
                                                 }, completion: {
                                                     completion(.success(channels))
                                                 })
@@ -75,6 +75,23 @@ extension ChannelsInteractor: ChannelsInteractorInterface {
                                             completion(.failure(error))
                                         }
                                     }
+        }
+    }
+    
+    /// Filter the result, every channel contains 6 series/media maximum
+    /// - Parameter channels: channels response
+    private func filterChannelsData(channels: inout [Channel]) {
+        for i in 0..<channels.count {
+            switch channels[i].type {
+            case .course:
+                if channels[i].latestMedia.count > mediaLimit {
+                    channels[i].latestMedia = Array(channels[i].latestMedia[0..<mediaLimit])
+                }
+            case .series:
+                if channels[i].series.count > mediaLimit {
+                    channels[i].series = Array(channels[i].series[0..<mediaLimit])
+                }
+            }
         }
     }
 }

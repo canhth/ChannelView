@@ -11,4 +11,8 @@ import Foundation
 struct Series: Decodable {
     let title: String
     let coverAsset: CoverAsset?
+    
+    var coverURL: String? {
+        return coverAsset?.url
+    }
 }
