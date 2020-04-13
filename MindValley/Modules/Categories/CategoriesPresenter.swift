@@ -17,6 +17,8 @@ final class CategoriesPresenter {
     private let interactor: CategoriesInteractorInterface
     private let router: CategoriesRouterInterface
 
+    private var categories = [Category]()
+    
     // MARK: - LifeCycle
 
     init(view: CategoriesViewInterface,
@@ -27,11 +29,25 @@ final class CategoriesPresenter {
         self.router = router
     }
 
-    func viewDidLoad() {
-    }
 }
 
 // MARK: - CategoriesPresenterInterface
 
 extension CategoriesPresenter: CategoriesPresenterInterface {
+    func fetchCategories() {
+        interactor.fetchCategories(fromCache: false) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let categories):
+                self.categories = categories
+                Logger.shared.info(object: categories)
+            case .failure(let error):
+                Logger.shared.error(object: error)
+            }
+        }
+    }
+    
+    func numberOfCategories() -> Int {
+        return categories.count
+    }
 }

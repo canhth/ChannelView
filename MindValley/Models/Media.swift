@@ -14,9 +14,11 @@ enum MediaType: String, Decodable {
 }
 
 struct Media: Decodable {
+    
     let type: MediaType
     let title: String
     let coverAsset: CoverAsset?
+    
     private let channel: ChannelName?
     
     var coverURL: String? {

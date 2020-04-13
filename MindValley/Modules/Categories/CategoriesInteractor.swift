@@ -30,19 +30,23 @@ extension CategoriesInteractor: CategoriesInteractorInterface {
         self.networkClient.fetch(endPoint: ChannelsAPI.fetchCategories,
                                  type: CategoriesResponse.self,
                                  loadFromCache: fromCache) { (result) in
-                                    DispatchQueue.main.async {
-                                        switch result {
-                                        case .success(let resultData):
-                                            if let data = resultData[NestedKey.data],
-                                                let channels = data[NestedKey.categories] {
-                                                completion(.success(channels))
-                                            } else {
-                                                completion(.success([]))
-                                            }
-                                        case .failure(let error):
-                                            completion(.failure(error))
-                                        }
-                                    }
+                                    self.parseCategoriesFrom(result, completion: completion)
+        }
+    }
+    
+    private func parseCategoriesFrom(_ result: Result<CategoriesResponse, NetworkError>, completion: @escaping (Result<[Category], NetworkError>) -> Void) {
+        DispatchQueue.main.async {
+            switch result {
+            case .success(let resultData):
+                if let data = resultData[NestedKey.data],
+                    let channels = data[NestedKey.categories] {
+                    completion(.success(channels))
+                } else {
+                    completion(.success([]))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
 }

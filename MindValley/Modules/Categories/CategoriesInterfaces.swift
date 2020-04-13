@@ -25,6 +25,8 @@ protocol CategoriesViewInterface: ViewInterface {
 
 // Presenter
 protocol CategoriesPresenterInterface: PresenterInterface {
+    func fetchCategories()
+    func numberOfCategories() -> Int
 }
 
 // Interactor
