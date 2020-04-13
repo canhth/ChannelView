@@ -74,24 +74,24 @@ class CourseCollectionCell: UICollectionViewCell {
     // MARK: Setups
     
     func setupViews() {
-        addSubview(coverImageView)
-        coverImageView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor) 
+        contentView.addSubview(coverImageView)
+        coverImageView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right:contentView.rightAnchor)
         coverImageView.heightAnchor.constraint(equalTo: coverImageView.widthAnchor,
                                                multiplier: DesignConstraints.courseCoverMultiplier)
             .set(active: true)
         
-        addSubview(mediaTitleStackView)
+        contentView.addSubview(mediaTitleStackView)
         mediaTitleStackView.anchor(top: coverImageView.bottomAnchor,
                                    left: coverImageView.leftAnchor,
                                    right: coverImageView.rightAnchor,
                                    paddingTop: Constraints.basePadding,
                                    paddingLeft: Constraints.basePadding / 2,
                                    paddingRight: Constraints.basePadding / 2)
-        mediaTitleStackView.bottomAnchor.constraint(equalTo: bottomAnchor).set(priority: UILayoutPriority.defaultLow).set(active: true)
+        mediaTitleStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).set(priority: UILayoutPriority.defaultLow).set(active: true)
     }
     
-    func configCell(with media: Media) {
-        
+    func configCell(with media: Media?) {
+        guard let media = media else { return }
         if let iconURL = media.coverURL, let URL = URL(string: iconURL) {
             coverImageView.hnk_setImageFromURL(URL, format: Format<UIImage>.init(name: "original"))
         } else {

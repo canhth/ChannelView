@@ -51,7 +51,7 @@ final class ChannelsViewController: BaseViewController {
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
         indicator.style = .medium
-        indicator.tintColor = AppColor.white
+        indicator.color = AppColor.white
         return indicator
     }()
     
@@ -79,10 +79,7 @@ final class ChannelsViewController: BaseViewController {
                          bottom: view.bottomAnchor,
                          right: view.safeAreaLayoutGuide.rightAnchor)
         
-        view.addSubview(loadingIndicator)
-        loadingIndicator.anchorCenter(horizontal: view.centerXAnchor,
-                                      vertical: view.centerYAnchor)
-        
+        tableView.tableFooterView = loadingIndicator
         tableView.addSubview(refreshControl)
     }
     
@@ -210,7 +207,7 @@ extension ChannelsViewController: UICollectionViewDataSource {
             return presenter.numberOfNewEpisodes()
 
         case .channels:
-            let channel = presenter.channelAtIndex(index: collectionView.tag - 1)
+            guard let channel = presenter.channelAtIndex(index: collectionView.tag - 1) else { return 0 }
             switch channel.type {
             case .course:
                 return channel.latestMedia.count
@@ -237,7 +234,7 @@ extension ChannelsViewController: UICollectionViewDataSource {
             
             // Channel section
         case .channels:
-            let channel = presenter.channelAtIndex(index: collectionView.tag - 1)
+            guard let channel = presenter.channelAtIndex(index: collectionView.tag - 1) else { return CourseCollectionCell ()}
             switch channel.type {
             case .course:
                 // Course layout
@@ -278,7 +275,7 @@ extension ChannelsViewController: UICollectionViewDelegateFlowLayout {
                           height: maxHeightOfNewEpisodes)
             
         case .channels:
-            let channel = presenter.channelAtIndex(index: collectionView.tag - 1)
+            guard let channel = presenter.channelAtIndex(index: collectionView.tag - 1) else { return .zero }
             switch channel.type {
             case .course:  break
             case .series:

@@ -27,6 +27,7 @@ final class ChannelSectionCell: UITableViewCell {
         let label = UILabel()
         label.textColor = AppColor.lightHeader
         label.font = MVFont.section
+        label.numberOfLines = 0
         return label
     }()
     
@@ -44,6 +45,7 @@ final class ChannelSectionCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = DesignConstraints.logoImageSize.width.dp / 2
         imageView.layer.masksToBounds = true
+        imageView.backgroundColor = AppColor.lightMedium.withAlphaComponent(0.6)
         return imageView
     }()
     
@@ -89,8 +91,8 @@ final class ChannelSectionCell: UITableViewCell {
                                 forCellWithReuseIdentifier: SeriesCollectionCell.typeName)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.allowsSelection = false
-
         collectionView.backgroundColor = AppColor.darkBackground
+        
         return collectionView
     }()
     
@@ -118,28 +120,28 @@ final class ChannelSectionCell: UITableViewCell {
     private func setupViews() {
         backgroundColor = AppColor.darkBackground
         
-        addSubview(separateView)
-        separateView.anchor(top: topAnchor,
-                            left: leftAnchor,
-                            right: rightAnchor,
+        contentView.addSubview(separateView)
+        separateView.anchor(top: contentView.topAnchor,
+                            left: contentView.leftAnchor,
+                            right: contentView.rightAnchor,
                             paddingLeft: Constraints.basePadding,
                             paddingRight: Constraints.basePadding,
                             height: Constraints.lineHeight)
         
-        addSubview(channelSectionStackView)
+        contentView.addSubview(channelSectionStackView)
         channelSectionStackView.anchor(top: separateView.bottomAnchor,
-                                       left: leftAnchor,
-                                       right: rightAnchor,
+                                       left: contentView.leftAnchor,
+                                       right: contentView.rightAnchor,
                                        paddingTop: Constraints.paddingX2,
                                        paddingLeft: Constraints.paddingX2,
                                        paddingRight: Constraints.paddingX2)
         
-        addSubview(collectionView)
+        contentView.addSubview(collectionView)
         collectionView.anchor(top: channelSectionStackView.bottomAnchor,
-                              left: leftAnchor,
-                              right: rightAnchor,
+                              left: contentView.leftAnchor,
+                              right: contentView.rightAnchor,
                               paddingTop: DesignConstraints.collectionPadding)
-        collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constraints.paddingX3)
+        collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constraints.paddingX3)
             .set(priority: .defaultLow)
             .set(active: true)
         collectionViewHeight = collectionView.heightAnchor.constraint(equalToConstant: 150)

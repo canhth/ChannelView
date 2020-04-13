@@ -67,30 +67,30 @@ final class CategorySectionCell: UITableViewCell {
     }
     
     private func setupViews() {
-        backgroundColor = AppColor.darkBackground
+        contentView.backgroundColor = AppColor.darkBackground
         
-        addSubview(separateView)
-        separateView.anchor(top: topAnchor,
-                            left: leftAnchor,
-                            right: rightAnchor,
+        contentView.addSubview(separateView)
+        separateView.anchor(top: contentView.topAnchor,
+                            left: contentView.leftAnchor,
+                            right: contentView.rightAnchor,
                             paddingLeft: Constraints.basePadding,
                             paddingRight: Constraints.basePadding,
                             height: Constraints.lineHeight)
         
-        addSubview(categoriesTitleLabel)
+        contentView.addSubview(categoriesTitleLabel)
         categoriesTitleLabel.anchor(top: separateView.bottomAnchor,
-                                    left: leftAnchor,
-                                    right: rightAnchor,
+                                    left: contentView.leftAnchor,
+                                    right: contentView.rightAnchor,
                                     paddingTop: Constraints.paddingX3,
                                     paddingLeft: Constraints.paddingX2,
                                     paddingRight: Constraints.paddingX2)
         
-        addSubview(collectionView)
+        contentView.addSubview(collectionView)
         collectionView.anchor(top: categoriesTitleLabel.bottomAnchor,
-                              left: leftAnchor,
-                              right: rightAnchor,
+                              left: contentView.leftAnchor,
+                              right: contentView.rightAnchor,
                               paddingTop: Constraints.paddingX2)
-        collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constraints.paddingX3)
+        collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constraints.paddingX3)
             .set(priority: .defaultLow)
             .set(active: true)
         collectionViewHeight = collectionView.heightAnchor.constraint(equalToConstant: 150)

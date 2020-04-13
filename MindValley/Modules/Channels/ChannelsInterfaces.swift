@@ -32,9 +32,9 @@ protocol ChannelsPresenterInterface: PresenterInterface {
     func numberOfNewEpisodes() -> Int
     func listChannelItems() -> [Channel]
     func listNewEpisodes() -> [Media]
-    func categoryAtIndex(index: Int) -> Category
-    func newEpisodeAt(index: Int) -> Media
-    func channelAtIndex(index: Int) -> Channel
+    func categoryAtIndex(index: Int) -> Category?
+    func newEpisodeAt(index: Int) -> Media?
+    func channelAtIndex(index: Int) -> Channel?
     func refreshAllChannels()
     func fetchChannelsInfo()
 }

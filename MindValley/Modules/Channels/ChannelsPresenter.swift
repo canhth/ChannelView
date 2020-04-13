@@ -43,7 +43,7 @@ final class ChannelsPresenter {
     }
 
     func viewDidLoad() {
-        fetchChannelsInfo()
+        fetchNewEpisodesFromCache()
     }
     
     private func fetchNewEpisodesFromCache() {
@@ -56,13 +56,11 @@ final class ChannelsPresenter {
             case .failure(let error):
                 Logger.shared.error(object: error)
             }
-            // Reload the new episode with latest data from sever.
-            self.fetchNewEpisode()
+            self.fetchChannelsInfo()
         }
     }
     
     private func fetchNewEpisode() {
-        isLoading = true
         dispatchGroup.enter()
         interactor.fetchNewEpisodes(loadFromCache: false) { [weak self] (result) in
             guard let self = self else { return }
@@ -72,7 +70,6 @@ final class ChannelsPresenter {
             case .failure(let error):
                 Logger.shared.error(object: error)
             }
-            self.isLoading = false
             self.dispatchGroup.leave()
         }
     }
@@ -122,16 +119,16 @@ extension ChannelsPresenter: ChannelsPresenterInterface {
         return newEpisodes.count
     }
     
-    func categoryAtIndex(index: Int) -> Category {
-        return categories[index]
+    func categoryAtIndex(index: Int) -> Category? {
+        return categories[safe: index]
     }
     
-    func newEpisodeAt(index: Int) -> Media {
-        return newEpisodes[index]
+    func newEpisodeAt(index: Int) -> Media? {
+        return newEpisodes[safe: index]
     }
     
-    func channelAtIndex(index: Int) -> Channel {
-        return listChannels[index]
+    func channelAtIndex(index: Int) -> Channel? {
+        return listChannels[safe: index]
     }
     
     func listChannelItems() -> [Channel] {
@@ -150,13 +147,15 @@ extension ChannelsPresenter: ChannelsPresenterInterface {
     }
     
     func fetchChannelsInfo() {
+        isLoading = true
         
-        fetchNewEpisodesFromCache()
+        fetchNewEpisode()
         fetchListChannels()
         fetchListCategories()
         
         dispatchGroup.notify(queue: .main) { [weak self] in
             guard let self = self else { return }
+            self.isLoading = false
             self.view.reloadData()
         }
     }

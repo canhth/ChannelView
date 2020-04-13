@@ -37,11 +37,12 @@ final class CategoryCollectionCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        addSubview(categoryButton)
+        contentView.addSubview(categoryButton)
         categoryButton.pinToSuperview()
     }
     
-    func configCell(category: Category) {
+    func configCell(category: Category?) {
+        guard let category = category else { return }
         categoryButton.setTitle(category.name, for: .normal)
     }
 }

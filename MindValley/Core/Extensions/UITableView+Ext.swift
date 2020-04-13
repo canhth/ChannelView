@@ -27,9 +27,9 @@ extension UITableView {
             fatalError("\(T.typeName) could not be dequeue")
         }
         return cell
-    }
+    } 
 }
- 
+
 extension UICollectionView {
     /**
      Convenience method to register a cell.

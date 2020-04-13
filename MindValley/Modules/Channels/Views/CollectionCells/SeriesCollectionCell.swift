@@ -17,22 +17,22 @@ final class SeriesCollectionCell: CourseCollectionCell {
     }
     
     override func setupViews() {
-        addSubview(coverImageView)
-        coverImageView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor)
+        contentView.addSubview(coverImageView)
+        coverImageView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor)
         coverImageView.heightAnchor.constraint(equalTo: coverImageView.widthAnchor,
                                                multiplier: DesignConstraints.seriesCoverMultiplier)
             .set(active: true)
         
-        addSubview(mediaTitleStackView)
+        contentView.addSubview(mediaTitleStackView)
         mediaTitleStackView.anchor(top: coverImageView.bottomAnchor,
                                    left: coverImageView.leftAnchor,
                                    right: coverImageView.rightAnchor,
                                    paddingTop: Constraints.basePadding)
-        mediaTitleStackView.bottomAnchor.constraint(equalTo: bottomAnchor).set(priority: UILayoutPriority.defaultLow).set(active: true)
+        mediaTitleStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).set(priority: UILayoutPriority.defaultLow).set(active: true)
     }
     
-    func configCell(with series: Series) {
-        
+    func configCell(with series: Series?) {
+        guard let series = series else { return }
         if let iconURL = series.coverURL, let URL = URL(string: iconURL) {
             coverImageView.hnk_setImageFromURL(URL, format: Format<UIImage>.init(name: "original"))
         } else {

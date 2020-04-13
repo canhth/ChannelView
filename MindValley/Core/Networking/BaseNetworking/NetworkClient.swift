@@ -48,6 +48,7 @@ public final class NetworkClient: NetworkRequestable {
         // Load from disk if device is not connect to network
         if loadFromCache || !Reachability.isConnectedToNetwork() {
             loadFromCached(endPoint: endPoint, request: request, completion: completion)
+            return
         }
         
         let task = session.dataTask(with: request) { data, response, error in
