@@ -18,11 +18,11 @@ final class CategoryCollectionCell: UICollectionViewCell {
         button.titleLabel?.lineBreakMode = .byWordWrapping
         button.contentHorizontalAlignment = .center
         button.titleEdgeInsets = UIEdgeInsets(top: 0,
-                                              left: Constraints.paddingX2,
+                                              left: Constraints.basePadding,
                                               bottom: 0,
-                                              right: Constraints.paddingX2)
+                                              right: Constraints.basePadding)
         button.backgroundColor = AppColor.lightMedium.withAlphaComponent(0.2)
-        button.layer.cornerRadius = 35
+        button.layer.cornerRadius = CGFloat(30).dp
         button.isUserInteractionEnabled = false
         return button
     }()

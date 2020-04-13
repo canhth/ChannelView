@@ -36,6 +36,7 @@ final class ChannelsTests: MindValleyTests {
                 XCTFail("waitForExpectationsWithTimeout errored: \(error)")
             } else {
                 XCTAssertTrue(self.presenter.numberOfSections() >= 3, "Should load all the section probably")
+                self.testLoadDataFromLocal()
             }
         }
     }
@@ -54,4 +55,15 @@ final class ChannelsTests: MindValleyTests {
         XCTAssertTrue(self.presenter.numberOfSections() >= 3, "Should load all the section probably")
     }
     
+    
+    func testLoadDataFromLocal() {
+        ChannelsInteractor().fetchChannels(loadFromCache: true) { (result) in
+            switch result {
+            case .success(let channels):
+                XCTAssertFalse(channels.isEmpty, "Should load data from cache perfectly")
+            case .failure(let error):
+                XCTFail("Can not load data from cache \(error)")
+            }
+        }
+    }
 }
